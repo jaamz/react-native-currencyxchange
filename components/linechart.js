@@ -1,66 +1,39 @@
-import Svg,{
-    Circle,
-    Ellipse,
-    G,
-    Text,
-    TSpan,
-    TextPath,
-    Path,
-    Polygon,
-    Polyline,
-    Line,
-    Rect,
-    Use,
-    Image,
-    Symbol,
-    Defs,
-    LinearGradient,
-    RadialGradient,
-    Stop,
-    ClipPath,
-    Pattern,
-    Mask,
-} from 'react-native-svg';
+import React from 'react'
+import { LineChart, YAxis, Grid } from 'react-native-svg-charts'
+import { View } from 'react-native'
 
-/* Use this if you are using Expo
-import { Svg } from 'expo';
-const { Circle, Rect } = Svg;
-*/
+class LineChartExample extends React.PureComponent {
 
-import React from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+    render() {
 
-// Percentages work in plain react-native but aren't supported in Expo yet, workaround with this or onLayout
-const { width, height } = Dimensions.get('window');
+        const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ]
 
-export default class SvgExample extends React.Component {
-  render() {
-    return (
-      <View
-        style={[
-          StyleSheet.absoluteFill,
-          { alignItems: 'center', justifyContent: 'center' },
-        ]}>
-        <Svg height={height * 0.5} width={width * 0.5} viewBox="0 0 100 100">
-          <Circle
-            cx="50"
-            cy="50"
-            r="45"
-            stroke="blue"
-            strokeWidth="2.5"
-            fill="green"
-          />
-          <Rect
-            x="15"
-            y="15"
-            width="70"
-            height="70"
-            stroke="red"
-            strokeWidth="2"
-            fill="yellow"
-          />
-        </Svg>
-      </View>
-    );
-  }
+        const contentInset = { top: 20, bottom: 20 }
+
+        return (
+            <View style={{ height: 200, flexDirection: 'row' }}>
+                <YAxis
+                    data={ data }
+                    contentInset={ contentInset }
+                    svg={{
+                        fill: 'grey',
+                        fontSize: 10,
+                    }}
+                    numberOfTicks={ 10 }
+                    formatLabel={ value => `${value}ºC` }
+                />
+                <LineChart
+                    style={{ flex: 1, marginLeft: 16 }}
+                    data={ data }
+                    svg={{ stroke: 'rgb(134, 65, 244)' }}
+                    contentInset={ contentInset }
+                >
+                    <Grid/>
+                </LineChart>
+            </View>
+        )
+    }
+
 }
+
+export default LineChartExample;
