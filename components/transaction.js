@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import { dropDownSelection } from './constant/index';
 import { Dropdown } from 'react-native-material-dropdown';
-
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 class Transaction extends Component {
     state = {
-        transactionTotal=[],
-        defaultCurrency='USD',
-        
-
+        transactionTotal:[],
+        defaultCurrency:'USD',
+        selectedCurrency:'JPY',
+        inputValue:'0',
 
     }
+
+    buttonPress = () => { 
+        this.setState({
+            transactionTotal: [...this.state.transactionTotal, inputValue]
+        });
+    }
+
     render() {
         return (
             <View>
@@ -23,7 +29,7 @@ class Transaction extends Component {
                 <View>
                     <TextInput
                     style={styles.textInput}
-                    placeholder='$$$'></TextInput>
+                    placeholder='$$$' />
                 </View>
                 <View>
                     <Dropdown 

@@ -3,20 +3,31 @@ import { dropDownSelection } from './constant/index';
 import { Dropdown } from 'react-native-material-dropdown';
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Button } from 'react-native';
 import { Icon } from 'react-native-elements';
-
+import axios from 'axios';
 class Mainpage extends Component {
     state = {
         currency: "USD",
         currencyCompared: "JPY",
         moneyValue: "1",
         comparedCurrency: [],
+        data: [],
 
     }
 
-    buttonPress = () => {
-        console.log(this.state.moneyValue + this.state.currency + this.state.currencyCompared)
-        let tempObj = { option1: this.state.currency, option2: this.state.currencyCompared };
+    componentDidMount() {
+        axios.get(`http://localhost:3000/${this.state.currency}?duration=${this.state.moneyValue}`)
+            .then(res => {
+                // console.log(res.data[0].rates);
+                this.setState({
+                    data: res.data[0].rates
+                })
+            })
+    }
 
+    buttonPress = () => {
+        // console.log(this.state.moneyValue + this.state.currency + this.state.currencyCompared)
+        let tempObj = { option1: this.state.currency, option2: this.state.currencyCompared };
+        // console.log(this.state.data)
         this.setState({
             comparedCurrency: [...this.state.comparedCurrency, tempObj]
         });
@@ -25,8 +36,8 @@ class Mainpage extends Component {
 
 
     render() {
-
-        let { container, dropDownStyle, buttonStyle } = styles;
+        // stretch goal to change USD -> to other value
+        let { container, dropDownStyle, buttonStyle, textInput } = styles;
         return (
             <ScrollView>
                 <View style={container}>
@@ -51,8 +62,8 @@ class Mainpage extends Component {
                     />
                 </View>
 
-                <View 
-                style={styles.buttonContainer}>
+                <View
+                    style={styles.buttonContainer}>
                     <TouchableOpacity
                         onPress={this.buttonPress}
                         style={buttonStyle}>
@@ -67,10 +78,10 @@ class Mainpage extends Component {
                     {
                         !!this.state.comparedCurrency &&
                         this.state.comparedCurrency.map((item, i) => (
-                            <View 
-                            key={i}
-                            style={styles.mapStyle}>
-                                <Text>{item.option1} - {item.option2}</Text>
+                            <View
+                                key={i}
+                                style={styles.mapStyle}>
+                                <Text>{this.state.moneyValue} {item.option1} - {this.state.data[item.option2]} {item.option2}</Text>
                             </View>
                         ))
                     }
@@ -102,17 +113,17 @@ const styles = StyleSheet.create({
 
     },
     buttonStyle: {
-        borderColor:'black',
+        borderColor: 'black',
         borderWidth: .5,
         width: 30,
         height: 30,
-       
+
 
 
     },
-    mapStyle:{
+    mapStyle: {
         borderWidth: 1,
-        borderColor:'black',
+        borderColor: 'black',
         height: 40,
         width: 300,
         alignItems: 'center',
@@ -120,9 +131,9 @@ const styles = StyleSheet.create({
 
 
     },
-    buttonContainer:{
-        justifyContent:'center',
-        alignItems:'center',
+    buttonContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 });
 

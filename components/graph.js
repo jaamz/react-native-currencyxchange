@@ -1,8 +1,11 @@
 import React from 'react'
 import { LineChart, YAxis, Grid } from 'react-native-svg-charts'
-import { View } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 
-class LineChartExample extends React.PureComponent {
+class Graph extends React.PureComponent {
+    state = {
+        
+    }
 
     render() {
 
@@ -11,6 +14,7 @@ class LineChartExample extends React.PureComponent {
         const contentInset = { top: 20, bottom: 20 }
 
         return (
+            <View>
             <View style={{ height: 200, flexDirection: 'row' }}>
                 <YAxis
                     data={data}
@@ -26,14 +30,33 @@ class LineChartExample extends React.PureComponent {
                     style={{ flex: 1, marginLeft: 16 }}
                     data={data}
                     svg={{ stroke: 'rgb(134, 65, 244)' }}
-                    contentInset={contentInset}
-                >
+                    contentInset={contentInset}>
                     <Grid />
                 </LineChart>
+                </View>
+            <View 
+            style={{flexDirection: 'row'}}>
+
+                    <TouchableOpacity>
+                        <Text>1 Week</Text>
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity>
+                        <Text>1 Month</Text>
+                    </TouchableOpacity>
+
+                     <TouchableOpacity>
+                        <Text>6 Months</Text>
+                    </TouchableOpacity>
+
+                     <TouchableOpacity>
+                        <Text>1 Year</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     }
 
 }
 
-export default LineChartExample;
+export default Graph;
