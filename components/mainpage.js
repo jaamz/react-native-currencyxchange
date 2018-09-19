@@ -51,9 +51,11 @@ class Mainpage extends Component {
                     />
                 </View>
 
-                <View>
+                <View 
+                style={styles.buttonContainer}>
                     <TouchableOpacity
-                        onPress={this.buttonPress}>
+                        onPress={this.buttonPress}
+                        style={buttonStyle}>
                         <Icon
                             name='add'
                             color='#83f67d'
@@ -100,11 +102,13 @@ const styles = StyleSheet.create({
 
     },
     buttonStyle: {
-        backgroundColor: '#38F5BE',
+        borderColor:'black',
+        borderWidth: .5,
         width: 30,
         height: 30,
-        alignItems: 'center',
-        justifyContent: 'center',
+       
+
+
     },
     mapStyle:{
         borderWidth: 1,
@@ -115,6 +119,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
 
 
+    },
+    buttonContainer:{
+        justifyContent:'center',
+        alignItems:'center',
     }
 });
 

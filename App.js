@@ -1,24 +1,43 @@
 import React from 'react';
-
-import { createStackNavigator } from 'react-navigation';
-
+import Header from './components/header'
+import Transaction from './components/transaction'
+import { StyleSheet, Text, View, Picker, PickerItem } from 'react-native';
+import { LineChart, Grid } from 'react-native-svg-charts';
+import LineChartExample from './components/linechart'
+import { Dropdown } from 'react-native-material-dropdown';
 import Mainpage from './components/mainpage';
-import LineChartExample from './components/linechart';
-import Transaction from './components/transaction';
+export default class App extends React.Component {
+  render() {
 
-const RootStack = createStackNavigator(
-    {
-        home: Mainpage,
-        chart: LineChartExample,
-        transactions: Transaction,
-    },
-    {
-        initialRouteName: 'home'
-    }
-)
+    return (
+      <View
+        style={styles.container}>
+        {/* <View>
+          <Header />
+        </View>
+        <LineChartExample />
+        <Mainpage /> */}
+        <Transaction />
+      </View>
+    );
 
-const App = () => (
-    <RootStack />
-)
 
-export default App;
+
+
+
+  }
+}
+
+
+
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    // alignItems: ' flex-start',
+    justifyContent: 'center',
+    // flexDirection: 'row',
+  },
+});
