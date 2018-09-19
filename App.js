@@ -1,34 +1,24 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { LineChart, Grid } from 'react-native-svg-charts';
-import LineChartExample from './components/linechart'
 
-export default class App extends React.Component {
-  render() {
-    
-    return (
-      <View style={styles.container}>
-      
-      <LineChartExample />
-      </View>
-    );
+import { createStackNavigator } from 'react-navigation';
 
+import Mainpage from './components/mainpage';
+import LineChartExample from './components/linechart';
+import Transaction from './components/transaction';
 
+const RootStack = createStackNavigator(
+    {
+        home: Mainpage,
+        chart: LineChartExample,
+        transactions: Transaction,
+    },
+    {
+        initialRouteName: 'home'
+    }
+)
 
+const App = () => (
+    <RootStack />
+)
 
-
-  }
-}
-
-
-
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
