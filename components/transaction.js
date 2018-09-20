@@ -17,14 +17,24 @@ class Transaction extends Component {
             transactionTotal: [...this.state.transactionTotal, inputValue]
         });
     }
-
+    
     render() {
         return (
             <View>
-                <View>
+                <View
+                style={styles.container}>
                     <Dropdown 
                     data={dropDownSelection}
+                    containerStyle={styles.dropDownStyle}
+                    label='Spent Currency'
+                    onChangeText={text => { this.setState({ defaultCurrency: text }) }}
                     value={this.state.defaultCurrency}/>
+                    <Dropdown 
+                    data={dropDownSelection}
+                    containerStyle={styles.dropDownStyle}
+                    label='Base Currency'
+                    onChangeText={text => { this.setState({ selectedCurrency: text }) }}
+                    value={this.state.selectedCurrency}/>
                 </View>
                 <View>
                     <TextInput
@@ -32,12 +42,9 @@ class Transaction extends Component {
                     placeholder='$$$' />
                 </View>
                 <View>
-                    <Dropdown 
-                    data={dropDownSelection}/>
-                </View>
-                <View>
                     <TouchableOpacity
-                    style={styles.buttonContainer}>
+                    style={styles.buttonContainer}
+                    onPress={this.buttonPress}>
                         <Text>+</Text>
                     </TouchableOpacity>
                 </View>

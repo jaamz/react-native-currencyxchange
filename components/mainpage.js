@@ -4,34 +4,49 @@ import { Dropdown } from 'react-native-material-dropdown';
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Button } from 'react-native';
 import { Icon } from 'react-native-elements';
 import axios from 'axios';
+import { Ionicons } from '@expo/vector-icons';
 class Mainpage extends Component {
     state = {
         currency: "USD",
         currencyCompared: "JPY",
         moneyValue: "1",
-        comparedCurrency: [],
-        data: [],
+        results: [],
+        convertedAmount: 0,
 
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:3000/${this.state.currency}?duration=${this.state.moneyValue}`)
+        this.getData()
+    }
+
+    getData = (callback) => {
+        axios.get(`http://localhost:3000/${this.state.currency}?duration=1&target=${this.state.currencyCompared}`)
             .then(res => {
-                // console.log(res.data[0].rates);
                 this.setState({
-                    data: res.data[0].rates
-                })
+                    convertedAmount: res.data[0][this.state.currencyCompared]
+                }, callback)
             })
     }
 
     buttonPress = () => {
-        // console.log(this.state.moneyValue + this.state.currency + this.state.currencyCompared)
-        let tempObj = { option1: this.state.currency, option2: this.state.currencyCompared };
-        // console.log(this.state.data)
-        this.setState({
-            comparedCurrency: [...this.state.comparedCurrency, tempObj]
-        });
+        this.getData(() => {
 
+            // console.log(this.state.moneyValue + this.state.currency + this.state.currencyCompared)
+            let tempObj = {
+                base: {
+                    amount: 1,
+                    symbol: this.state.currency,
+                },
+                converted: {
+                    amount: this.state.convertedAmount,
+                    symbol: this.state.currencyCompared
+                }
+            };
+            // console.log(this.state.data)
+            this.setState({
+                results: [...this.state.results, tempObj]
+            });
+        })
     }
 
 
@@ -66,7 +81,7 @@ class Mainpage extends Component {
                     style={styles.buttonContainer}>
                     <TouchableOpacity
                         onPress={this.buttonPress}
-                        style={buttonStyle}>
+                        iconName='add-circle'>
                         <Icon
                             name='add'
                             color='#83f67d'
@@ -76,12 +91,12 @@ class Mainpage extends Component {
 
                 <View>
                     {
-                        !!this.state.comparedCurrency &&
-                        this.state.comparedCurrency.map((item, i) => (
+                        !!this.state.results &&
+                        this.state.results.map((item, i) => (
                             <View
                                 key={i}
                                 style={styles.mapStyle}>
-                                <Text>{this.state.moneyValue} {item.option1} - {this.state.data[item.option2]} {item.option2}</Text>
+                                <Text>{item.base.amount} {item.base.symbol} - {item.converted.amount} {item.converted.symbol}</Text>
                             </View>
                         ))
                     }

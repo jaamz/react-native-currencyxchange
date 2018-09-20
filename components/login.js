@@ -4,7 +4,11 @@ import { Dropdown } from 'react-native-material-dropdown';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 const Login = () => {
-    return (  );
+    return (  
+        <View>
+            
+        </View>
+    );
 }
  
 export default Login;

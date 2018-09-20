@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Picker, PickerItem } from 'react-native';
-import { LineChart, Grid } from 'react-native-svg-charts';
+// import { LineChart, Grid } from 'react-native-svg-charts';
 import { Dropdown } from 'react-native-material-dropdown';
 import { createBottomTabNavigator } from 'react-navigation';
 
