@@ -110,8 +110,15 @@ class Mainpage extends Component {
 
 
                                 {/* <Text>{item.base.amount} {item.base.symbol} - {item.converted.amount} {item.converted.symbol}</Text> */}
-                                <Text>{this.state['calculation-'+i]*item.base.amount} {item.base.symbol} 
-                                    - {this.state['calculation-'+i]*item.converted.amount} {item.converted.symbol}</Text>
+                                { 
+                                    this.state['calculation-'+i] 
+                                    ? 
+                                        <Text>{this.state['calculation-'+i]*item.base.amount} {item.base.symbol} 
+                                            - {this.state['calculation-'+i]*item.converted.amount} {item.converted.symbol}</Text>
+                                    :
+                                        <Text>{item.base.symbol} - {item.converted.symbol}</Text>
+
+                                }
                             </View>
                         ))
                     }
@@ -148,12 +155,8 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30,
 
-
-
     },
     mapStyle: {
-        borderWidth: 1,
-        borderColor: 'black',
         height: 40,
         width: 300,
         alignItems: 'center',
@@ -164,7 +167,12 @@ const styles = StyleSheet.create({
     buttonContainer: {
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    loadContainer:{
+        paddingBottom: 10,
+        alignItems:'center',
     }
+    
 });
 
 

@@ -5,46 +5,46 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 
 class Transaction extends Component {
     state = {
-        transactionTotal:[],
-        defaultCurrency:'USD',
-        selectedCurrency:'JPY',
-        inputValue:'0',
+        transactionTotal: [],
+        defaultCurrency: 'USD',
+        selectedCurrency: 'JPY',
+        inputValue: '0',
 
     }
 
-    buttonPress = () => { 
+    buttonPress = () => {
         this.setState({
             transactionTotal: [...this.state.transactionTotal, inputValue]
         });
     }
-    
+
     render() {
         return (
             <View>
                 <View
-                style={styles.container}>
-                    <Dropdown 
-                    data={dropDownSelection}
-                    containerStyle={styles.dropDownStyle}
-                    label='Spent Currency'
-                    onChangeText={text => { this.setState({ defaultCurrency: text }) }}
-                    value={this.state.defaultCurrency}/>
-                    <Dropdown 
-                    data={dropDownSelection}
-                    containerStyle={styles.dropDownStyle}
-                    label='Base Currency'
-                    onChangeText={text => { this.setState({ selectedCurrency: text }) }}
-                    value={this.state.selectedCurrency}/>
+                    style={styles.container}>
+                    <Dropdown
+                        data={dropDownSelection}
+                        containerStyle={styles.dropDownStyle}
+                        label='Spent Currency'
+                        onChangeText={text => { this.setState({ defaultCurrency: text }) }}
+                        value={this.state.defaultCurrency} />
+                    <Dropdown
+                        data={dropDownSelection}
+                        containerStyle={styles.dropDownStyle}
+                        label='Base Currency'
+                        onChangeText={text => { this.setState({ selectedCurrency: text }) }}
+                        value={this.state.selectedCurrency} />
                 </View>
                 <View>
                     <TextInput
-                    style={styles.textInput}
-                    placeholder='$$$' />
+                        style={styles.textInput}
+                        placeholder='$$$' />
                 </View>
                 <View>
                     <TouchableOpacity
-                    style={styles.buttonContainer}
-                    onPress={this.buttonPress}>
+                        style={styles.buttonContainer}
+                        onPress={this.buttonPress}>
                         <Text>+</Text>
                     </TouchableOpacity>
                 </View>
@@ -74,15 +74,15 @@ const styles = StyleSheet.create({
 
     },
     buttonStyle: {
-        borderColor:'black',
+        borderColor: 'black',
         borderWidth: .5,
         width: 30,
         height: 30,
 
     },
-    mapStyle:{
+    mapStyle: {
         borderWidth: 1,
-        borderColor:'black',
+        borderColor: 'black',
         height: 40,
         width: 300,
         alignItems: 'center',
@@ -90,8 +90,8 @@ const styles = StyleSheet.create({
 
 
     },
-    buttonContainer:{
-        justifyContent:'center',
-        alignItems:'center',
+    buttonContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 });

@@ -9,7 +9,6 @@ import { LineChart, BarChart, PieChart, ProgressChart, ContributionGraph } from 
 
 class Graph extends React.PureComponent {
     state = {
-        data: [],
         currency1: 'USD',
         currency2: 'CAD',
         days: '30',
@@ -156,10 +155,10 @@ const styles = StyleSheet.create({
 
     },
     buttonStyle: {
-        backgroundColor:'#24B724',
+        backgroundColor: '#24B724',
         width: 80,
         height: 35,
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 7,
     },
