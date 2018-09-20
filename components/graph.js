@@ -24,7 +24,6 @@ class Graph extends React.PureComponent {
     grabData = currency => {
         axios.get(`http://localhost:3000/${this.state.currency1}?duration=${this.state.days}&target=${this.state.currency2}`)
             .then(res => {
-                console.log(res.data);
                 this.setState({
                     xAxis: res.data.map(x => x.date),
                     yAxis: res.data.map(x => x[this.state.currency2])
