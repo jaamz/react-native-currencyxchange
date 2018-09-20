@@ -12,6 +12,7 @@ class Mainpage extends Component {
         moneyValue: "1",
         results: [],
         convertedAmount: 0,
+        calculation:1,
 
     }
 
@@ -96,7 +97,21 @@ class Mainpage extends Component {
                             <View
                                 key={i}
                                 style={styles.mapStyle}>
-                                <Text>{item.base.amount} {item.base.symbol} - {item.converted.amount} {item.converted.symbol}</Text>
+                                <TextInput 
+                                style={styles.textInput}
+                                value={this.state['calculation-'+i]}
+                                onChangeText={text => {this.setState({['calculation-'+i]: text})}}
+                                />
+                                {/* <TextInput 
+                                style={styles.textInput}
+                                value={this.state.calculation}
+                                onChangeText={text => {this.setState({calculation: text})}}
+                                /> */}
+
+
+                                {/* <Text>{item.base.amount} {item.base.symbol} - {item.converted.amount} {item.converted.symbol}</Text> */}
+                                <Text>{this.state['calculation-'+i]*item.base.amount} {item.base.symbol} 
+                                    - {this.state['calculation-'+i]*item.converted.amount} {item.converted.symbol}</Text>
                             </View>
                         ))
                     }
