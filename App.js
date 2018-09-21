@@ -9,14 +9,15 @@ import { Ionicons } from '@expo/vector-icons';
 import Header from './components/header'
 import Graph from './components/graph'
 import Mainpage from './components/mainpage';
-import Transaction from './components/transaction'
+import Transaction from './components/transaction';
+import { Font } from 'expo';
 
 
 const TabNavigator = createBottomTabNavigator(
   {
     Home: Mainpage,
     Graph: Graph,
-    Transactions: Transaction
+    Log: Transaction
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -27,12 +28,11 @@ const TabNavigator = createBottomTabNavigator(
           iconName = `ios-information-circle${focused ? '' : '-outline'}`;
         } else if (routeName === 'Graph') {
           iconName = `ios-trending-up${focused ? '' : '-outline'}`;
-        } else if (routeName === 'Transactions') {
+        } else if (routeName === 'Log') {
           iconName = `ios-paper${focused ? '' : '-outline'}`;
         }
 
-        // You can return any component that you like here! We usually use an
-        // icon component from react-native-vector-icons
+
         return <Ionicons name={iconName} size={25} color={tintColor} />;
       },
     }),
@@ -43,13 +43,13 @@ const TabNavigator = createBottomTabNavigator(
   });
 
 
-// {/* <View>
-//   <Header />
-// </View> */}
-//  {/* <Mainpage /> */}
-// {/* <Transaction /> */}
 
-const App = () => <TabNavigator />
+
+const App = () => <View
+                    style={{ flex: 1 }}>
+                    <Header />
+                    <TabNavigator />
+                  </View>
 
 export default App;
 

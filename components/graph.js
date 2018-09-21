@@ -50,7 +50,7 @@ class Graph extends React.PureComponent {
     // Ex. 30 Days Button ( () => this.changeAmountOfDays(30))
     changeAmountOfDays = days => {
         this.setState({
-            days: days
+            days
         }, () => {
             this.grabData(days)
         })
@@ -69,7 +69,8 @@ class Graph extends React.PureComponent {
                         onChangeText={this.onChangeDrop2}
                         value={this.state.currency1}
                     />
-
+                    <Text
+                    style={styles.inBetween}>⇄</Text>
                     <Dropdown
                         containerStyle={styles.dropDownStyle}
                         label='Currency Compared'
@@ -86,12 +87,11 @@ class Graph extends React.PureComponent {
                             }]
                         }}
                         width={Dimensions.get('window').width}
-                        height={500}
+                        height={420}
                         chartConfig={{
                             backgroundColor: '#FFFFFF',
                             backgroundGradientFrom: '#FFFFFF',
                             backgroundGradientTo: '#E1F9E1',
-
                             color: (opacity = 1) => `rgba(0, 4, 0, ${opacity})`,
                             style: {
                                 borderRadius: 16
@@ -151,16 +151,18 @@ const styles = StyleSheet.create({
     },
     dropDownStyle: {
         width: 120,
-        paddingTop: 5,
+        // paddingTop: 5,
 
     },
     buttonStyle: {
-        backgroundColor: '#24B724',
+        // backgroundColor: '#24B724',
         width: 80,
         height: 35,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 7,
+        borderRadius: 3,
+        borderWidth: 1,
+        borderColor:'#24B724'
     },
     mapStyle: {
         borderWidth: 1,
@@ -175,6 +177,10 @@ const styles = StyleSheet.create({
     buttonContainer: {
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    inBetween:{
+        paddingTop:30,
+        // fontSize: 20,
     }
 });
 

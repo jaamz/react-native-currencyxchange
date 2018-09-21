@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import { Icon } from 'react-native-elements';
+// import { Icon } from 'react-native-elements';
 
 const Header = props => {
 
@@ -8,15 +8,10 @@ const Header = props => {
         <View>
             <View
                 style={styles.container}>
-                <TouchableOpacity>
-                    <Icon
-                        reverse
-                        name='person'
-                        color='#83f67d'
-                    />
-                </TouchableOpacity>
-                <Text>
-                    CurrencyXchange
+                    
+                <Text
+                style={styles.font}>
+                    Currency
                 </Text>
             </View>
         </View>
@@ -28,6 +23,19 @@ export default Header;
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        justifyContent: 'space-evenly'
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor:'green',
+        backgroundColor:'green',
+        borderWidth:5,
+        paddingTop:20,
+        paddingBottom:20,
+
+    },
+    font: {
+        fontWeight: 'bold',
+        fontSize:22,
+        color:'white'
+
     }
 })

@@ -4,7 +4,7 @@ import { Dropdown } from 'react-native-material-dropdown';
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Button } from 'react-native';
 import { Icon } from 'react-native-elements';
 import axios from 'axios';
-import { Ionicons } from '@expo/vector-icons';
+// import { Ionicons } from '@expo/vector-icons';
 class Mainpage extends Component {
     state = {
         currency: "USD",
@@ -12,7 +12,7 @@ class Mainpage extends Component {
         moneyValue: "1",
         results: [],
         convertedAmount: 0,
-        calculation:1,
+        calculation: 1,
 
     }
 
@@ -32,7 +32,6 @@ class Mainpage extends Component {
     buttonPress = () => {
         this.getData(() => {
 
-            // console.log(this.state.moneyValue + this.state.currency + this.state.currencyCompared)
             let tempObj = {
                 base: {
                     amount: 1,
@@ -43,7 +42,6 @@ class Mainpage extends Component {
                     symbol: this.state.currencyCompared
                 }
             };
-            // console.log(this.state.data)
             this.setState({
                 results: [...this.state.results, tempObj]
             });
@@ -52,16 +50,10 @@ class Mainpage extends Component {
 
 
     render() {
-        // stretch goal to change USD -> to other value
         let { container, dropDownStyle, buttonStyle, textInput } = styles;
         return (
             <ScrollView>
                 <View style={container}>
-                    {/* <TextInput
-                    style={textInput}
-                    value={this.state.moneyValue}
-                    onChangeText={text => { this.setState({ moneyValue: text }) }}
-                /> */}
                     <Dropdown
                         containerStyle={dropDownStyle}
                         label='Main Currency'
@@ -69,6 +61,10 @@ class Mainpage extends Component {
                         onChangeText={text => { this.setState({ currency: text }) }}
                         value={this.state.currency}
                     />
+                    <Text
+                    style={styles.inBetween}>
+                    ⇄
+                    </Text>
                     <Dropdown
                         containerStyle={dropDownStyle}
                         label='Currency Compared'
@@ -97,26 +93,22 @@ class Mainpage extends Component {
                             <View
                                 key={i}
                                 style={styles.mapStyle}>
-                                <TextInput 
-                                style={styles.textInput}
-                                value={this.state['calculation-'+i]}
-                                onChangeText={text => {this.setState({['calculation-'+i]: text})}}
+                                <TextInput
+                                    style={styles.textInput}
+                                    placeholder="#"
+                                    value={this.state['calculation-' + i]}
+                                    onChangeText={text => { this.setState({ ['calculation-' + i]: text }) }}
                                 />
-                                {/* <TextInput 
-                                style={styles.textInput}
-                                value={this.state.calculation}
-                                onChangeText={text => {this.setState({calculation: text})}}
-                                /> */}
 
-
-                                {/* <Text>{item.base.amount} {item.base.symbol} - {item.converted.amount} {item.converted.symbol}</Text> */}
-                                { 
-                                    this.state['calculation-'+i] 
-                                    ? 
-                                        <Text>{this.state['calculation-'+i]*item.base.amount} {item.base.symbol} 
-                                            - {this.state['calculation-'+i]*item.converted.amount} {item.converted.symbol}</Text>
-                                    :
-                                        <Text>{item.base.symbol} - {item.converted.symbol}</Text>
+                                {
+                                    this.state['calculation-' + i]
+                                        ?
+                                        <Text>
+                                            {this.state['calculation-' + i] * item.base.amount} {item.base.symbol}
+                                            ⇄ {this.state['calculation-' + i] * item.converted.amount} {item.converted.symbol}
+                                        </Text>
+                                        :
+                                        <Text>{item.base.symbol} ⇄ {item.converted.symbol}</Text>
 
                                 }
                             </View>
@@ -141,8 +133,6 @@ const styles = StyleSheet.create({
         width: 50,
         height: 30,
         textAlign: 'center',
-        borderWidth: 1,
-        borderColor: 'black',
 
     },
     dropDownStyle: {
@@ -161,6 +151,9 @@ const styles = StyleSheet.create({
         width: 300,
         alignItems: 'center',
         justifyContent: 'center',
+        flexDirection: 'row',
+        borderWidth: 2,
+        borderColor: 'red'
 
 
     },
@@ -168,11 +161,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    loadContainer:{
+    loadContainer: {
         paddingBottom: 10,
-        alignItems:'center',
+        alignItems: 'center',
+    },
+    inBetween: {
+        paddingTop: 30,
+        // fontSize: 20,
     }
-    
+
 });
 
 
