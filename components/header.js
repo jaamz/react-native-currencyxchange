@@ -11,7 +11,7 @@ const Header = props => {
                     
                 <Text
                 style={styles.font}>
-                    Currency
+                    RealTime
                 </Text>
             </View>
         </View>
@@ -25,10 +25,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor:'green',
         backgroundColor:'green',
-        borderWidth:5,
-        paddingTop:20,
+        paddingTop:35,
         paddingBottom:20,
 
     },

@@ -16,6 +16,8 @@ class Graph extends React.PureComponent {
         xAxis: [],
     }
 
+    
+
     componentDidMount() {
         this.grabData()
     }
@@ -70,7 +72,9 @@ class Graph extends React.PureComponent {
                         value={this.state.currency1}
                     />
                     <Text
-                    style={styles.inBetween}>⇄</Text>
+                    style={styles.inBetween}>
+                    ⇄
+                    </Text>
                     <Dropdown
                         containerStyle={styles.dropDownStyle}
                         label='Currency Compared'

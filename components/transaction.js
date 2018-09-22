@@ -6,56 +6,102 @@ import axios from 'axios';
 
 class Transaction extends Component {
   state = {
-    transactionTotal: [],
-    defaultCurrency: 'USD',
-    selectedCurrency: 'JPY',
-    inputValue: '0',
-    convertedAmount: 0,
-    rate: 0
+    transactions: [],
+    baseCurrency: 'USD',
+    targetCurrency: 'JPY',
+    amount: '0',
   }
 
   componentDidMount() {
-    this.getData(this.state.defaultCurrency, this.state.selectedCurrency, (rate) => { console.log("RATE:", rate) });
+    // this.getData(this.state.defaultCurrency, this.state.selectedCurrency, (rate) => { console.log("RATE:", rate) });
+    // this.getData('JPY')
+    //   .then(rate => {
+    //     console.log("RATE:", rate);
+    //   })
   }
 
-  getData = (currency, second, callback) => {
-    axios.get(`http://localhost:3000/${currency}?duration=1&target=${second}`)
-      .then(res => {
-        this.setState({
-          rate: res.data[0][second]
-        }, callback(res.data[0][second]))
-      })
+  getData = (base, target) => {
+    return axios.get(`http://localhost:3000/${base}?duration=1&target=${target}`)
+      .then(res => new Promise((resolve, reject) => resolve(res.data[0][target])))
   }
 
   buttonPress = () => {
     console.log("INPUT:", this.state.inputValue)
-    this.setState({
-      transactionTotal: [
-        ...this.state.transactionTotal,
-        {
-          base: this.state.defaultCurrency,
-          conversion: this.state.selectedCurrency,
-          base_amount: parseFloat(this.state.inputValue),
-          conversion_amount: parseFloat(this.state.inputValue) * this.state.rate
-        }
-      ]
-    });
+    let { baseCurrency, targetCurrency, amount } = this.state;
+    let base_rate;
+    let target_rate;
+    this.getData('USD', baseCurrency)
+      .then(base_rate_data => {
+        base_rate = base_rate_data;
+        return this.getData('USD', targetCurrency)
+      })
+      .then(target_rate_data => {
+        target_rate = target_rate_data;
+
+        this.setState({
+          transactions: [
+            ...this.state.transactions,
+            {
+              unit: parseFloat(amount),
+              base_rate,
+              target_rate,
+              base_sym: baseCurrency,
+              target_sym: targetCurrency
+            }
+          ]
+        }, () => { console.log(this.state.transactions) });
+      })
   }
 
-  baseChange = base => {
-    if (this.state.transactionTotal.length > 0) {
-      this.getData(this.state.defaultCurrency, base, (rate) => {
-        // refresh all the data
-        let newTransactions = this.state.transactionTotal.map(x => ({
-          ...x,
-          base: base,
-          base_amount: x.base_amount * rate
-        }))
-        console.log(newTransactions)
-        this.setState({ transactionTotal: newTransactions })
+  secondButtonPress = () => {
+    let { baseCurrency, targetCurrency, amount } = this.state;
+    let base_rate;
+    let target_rate;
+
+    this.getData(baseCurrency, 'USD')
+      .then(conversion => {
+        amount = conversion * amount;
+        return this.getData('USD', baseCurrency);
       })
+      .then(base_rate_data => {
+        base_rate = base_rate_data;
+        return this.getData('USD', targetCurrency)
+      })
+      .then(target_rate_data => {
+        target_rate = target_rate_data;
+
+        this.setState({
+          transactions: [
+            ...this.state.transactions,
+            {
+              unit: parseFloat(amount),
+              base_rate,
+              target_rate,
+              base_sym: baseCurrency,
+              target_sym: targetCurrency
+            }
+          ]
+        }, () => { console.log(this.state.transactions) });
+      })
+  }
+
+  baseChange = baseCurrency => {
+    if (this.state.transactions.length > 0) {
+      // go through and update all the rates
+      this.getData('USD', baseCurrency)
+        .then(newBaseRate => {
+          this.setState({
+            baseCurrency,
+            transactions: this.state.transactions.map(x => ({
+              ...x,
+              base_rate: newBaseRate,
+              base_sym: baseCurrency
+            }))
+          })
+        })
+    } else {
+      this.setState({ baseCurrency })
     }
-    this.setState({ defaultCurrency: base })
   }
 
 
@@ -67,40 +113,40 @@ class Transaction extends Component {
           <Dropdown
             data={dropDownSelection}
             containerStyle={styles.dropDownStyle}
-            label='Spent Currency'
+            label='Base Currency'
             onChangeText={this.baseChange}
-            value={this.state.defaultCurrency} />
+            value={this.state.baseCurrency} />
           <Text
             style={styles.inBetween}>⇄</Text>
           <Dropdown
             data={dropDownSelection}
             containerStyle={styles.dropDownStyle}
-            label='Base Currency'
-            onChangeText={text => { this.setState({ selectedCurrency: text }) }}
-            value={this.state.selectedCurrency} />
+            label='Target Currency'
+            onChangeText={text => { this.setState({ targetCurrency: text }) }}
+            value={this.state.targetCurrency} />
         </View>
         <View>
           <TextInput
             style={styles.textInput}
-            onChangeText={inputValue => { this.setState({ inputValue }) }}
+            onChangeText={amount => { this.setState({ amount }) }}
             placeholder='#'
           />
         </View>
         <View>
           <TouchableOpacity
             style={styles.buttonContainer}
-            onPress={this.buttonPress}>
+            onPress={this.state.baseCurrency === 'USD' ? this.buttonPress : this.secondButtonPress}>
             <Text>+</Text>
           </TouchableOpacity>
         </View>
 
         <FlatList
-          data={this.state.transactionTotal}
+          data={this.state.transactions}
           extraData={this.state}
           renderItem={({ item }) => (
             <View>
-              <Text>{item.base}: {item.base_amount}</Text>
-              <Text>{item.conversion}: {item.conversion_amount}</Text>
+              <Text>{item.base_sym}: {item.base_rate * item.unit}</Text>
+              <Text>{item.target_sym}: {item.target_rate * item.unit}</Text>
             </View>
           )}
           keyExtractor={(item, index) => index + ""}

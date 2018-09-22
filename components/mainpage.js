@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { dropDownSelection } from './constant/index';
 import { Dropdown } from 'react-native-material-dropdown';
-import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Dimensions} from 'react-native';
 import { Icon } from 'react-native-elements';
 import axios from 'axios';
 // import { Ionicons } from '@expo/vector-icons';
@@ -48,7 +48,6 @@ class Mainpage extends Component {
         })
     }
 
-
     render() {
         let { container, dropDownStyle, buttonStyle, textInput } = styles;
         return (
@@ -93,24 +92,31 @@ class Mainpage extends Component {
                             <View
                                 key={i}
                                 style={styles.mapStyle}>
+                                <View
+                                style={{width:50}}>
                                 <TextInput
                                     style={styles.textInput}
                                     placeholder="#"
                                     value={this.state['calculation-' + i]}
                                     onChangeText={text => { this.setState({ ['calculation-' + i]: text }) }}
                                 />
+                                </View>
 
+                                <View
+                                style={styles.calculationStyle}>
                                 {
                                     this.state['calculation-' + i]
                                         ?
                                         <Text>
-                                            {this.state['calculation-' + i] * item.base.amount} {item.base.symbol}
-                                            ⇄ {this.state['calculation-' + i] * item.converted.amount} {item.converted.symbol}
+                                            {this.state['calculation-' + i] * item.base.amount } {item.base.symbol}
+                                          ⇄ {this.state['calculation-' + i] * item.converted.amount } {item.converted.symbol}
                                         </Text>
                                         :
                                         <Text>{item.base.symbol} ⇄ {item.converted.symbol}</Text>
 
                                 }
+                                </View>
+
                             </View>
                         ))
                     }
@@ -130,9 +136,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly'
     },
     textInput: {
-        width: 50,
-        height: 30,
+        width: 100,
+        height: 35,
         textAlign: 'center',
+        justifyContent:'flex-start',
+        // borderColor:'blue',
+        // borderWidth:3
 
     },
     dropDownStyle: {
@@ -140,20 +149,20 @@ const styles = StyleSheet.create({
 
     },
     buttonStyle: {
-        borderColor: 'black',
-        borderWidth: .5,
+        // borderColor: 'black',
+        // borderWidth: .5,
         width: 30,
         height: 30,
 
     },
     mapStyle: {
         height: 40,
-        width: 300,
+        width: Dimensions.get('window').width,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         flexDirection: 'row',
         borderWidth: 2,
-        borderColor: 'red'
+        // borderColor: 'red'
 
 
     },
@@ -168,6 +177,20 @@ const styles = StyleSheet.create({
     inBetween: {
         paddingTop: 30,
         // fontSize: 20,
+    },
+    calculationStyle: {
+        justifyContent:'center',
+        // borderColor:'grey',
+        // borderWidth:3,
+        height:35,
+        width:300,
+        alignItems:'center'
+    },
+    blockMap: {
+        justifyContent:'space-between',
+        // backgroundColor:'red',
+        flexDirection:'row',
+
     }
 
 });
