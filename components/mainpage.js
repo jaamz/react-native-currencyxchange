@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { dropDownSelection } from './constant/index';
 import { Dropdown } from 'react-native-material-dropdown';
-import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Dimensions} from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import { Icon } from 'react-native-elements';
 import axios from 'axios';
+// import accounting from 'accounting'
 // import { Ionicons } from '@expo/vector-icons';
 class Mainpage extends Component {
     state = {
@@ -61,8 +62,8 @@ class Mainpage extends Component {
                         value={this.state.currency}
                     />
                     <Text
-                    style={styles.inBetween}>
-                    ⇄
+                        style={styles.inBetween}>
+                        ⇄
                     </Text>
                     <Dropdown
                         containerStyle={dropDownStyle}
@@ -77,7 +78,9 @@ class Mainpage extends Component {
                     style={styles.buttonContainer}>
                     <TouchableOpacity
                         onPress={this.buttonPress}
+                        style={styles.buttonStyle}
                         iconName='add-circle'>
+
                         <Icon
                             name='add'
                             color='#83f67d'
@@ -93,28 +96,36 @@ class Mainpage extends Component {
                                 key={i}
                                 style={styles.mapStyle}>
                                 <View
-                                style={{width:50}}>
-                                <TextInput
-                                    style={styles.textInput}
-                                    placeholder="#"
-                                    value={this.state['calculation-' + i]}
-                                    onChangeText={text => { this.setState({ ['calculation-' + i]: text }) }}
-                                />
+                                    style={{ width: 50 }}>
+                                    <TextInput
+                                        style={styles.textInput}
+                                        placeholder="Enter amount here"
+                                        value={this.state['calculation-' + i]}
+                                        onChangeText={text => { this.setState({ ['calculation-' + i]: text }) }}
+                                    />
                                 </View>
 
                                 <View
-                                style={styles.calculationStyle}>
-                                {
-                                    this.state['calculation-' + i]
-                                        ?
-                                        <Text>
-                                            {this.state['calculation-' + i] * item.base.amount } {item.base.symbol}
-                                          ⇄ {this.state['calculation-' + i] * item.converted.amount } {item.converted.symbol}
-                                        </Text>
-                                        :
-                                        <Text>{item.base.symbol} ⇄ {item.converted.symbol}</Text>
+                                    style={styles.calculationStyle}>
+                                    {
+                                        this.state['calculation-' + i]
+                                            ?
+                                            <View
+                                            style={{flexDirection:'column', alignItems:'center'}}>
+                                                <Text>
+                                                    {this.state['calculation-' + i] * item.base.amount} {item.base.symbol}
+                                                </Text>
+                                                <Text>
+                                                    =
+                                            </Text>
+                                                <Text>
+                                                    {this.state['calculation-' + i] * item.converted.amount} {item.converted.symbol}
+                                                </Text>
+                                            </View>
+                                            :
+                                            <Text>{item.base.symbol} = {item.converted.symbol}</Text>
 
-                                }
+                                    }
                                 </View>
 
                             </View>
@@ -139,7 +150,8 @@ const styles = StyleSheet.create({
         width: 100,
         height: 35,
         textAlign: 'center',
-        justifyContent:'flex-start',
+        justifyContent: 'flex-start',
+        marginLeft: 5
         // borderColor:'blue',
         // borderWidth:3
 
@@ -153,17 +165,28 @@ const styles = StyleSheet.create({
         // borderWidth: .5,
         width: 30,
         height: 30,
+        marginBottom: 10,
+        borderWidth: .75,
+        borderColor: '#24B724'
 
     },
     mapStyle: {
-        height: 40,
+        height: 60,
         width: Dimensions.get('window').width,
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row',
-        borderWidth: 2,
+        borderRadius: 10,
+        borderWidth: 1,
         // borderColor: 'red'
-
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.34,
+        shadowRadius: 6.27,
+        marginBottom: 10,
 
     },
     buttonContainer: {
@@ -179,17 +202,18 @@ const styles = StyleSheet.create({
         // fontSize: 20,
     },
     calculationStyle: {
-        justifyContent:'center',
+        justifyContent: 'center',
         // borderColor:'grey',
         // borderWidth:3,
-        height:35,
-        width:300,
-        alignItems:'center'
+        height: 35,
+        width: 300,
+        alignItems: 'center',
+        flexDirection: 'column'
     },
     blockMap: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         // backgroundColor:'red',
-        flexDirection:'row',
+        flexDirection: 'row',
 
     }
 

@@ -104,6 +104,9 @@ class Transaction extends Component {
     }
   }
 
+  // targetChange = targetCurrency => {
+  //   if (this.state)
+  // }
 
   render() {
     return (
