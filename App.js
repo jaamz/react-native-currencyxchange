@@ -1,16 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, Picker, PickerItem } from 'react-native';
-// import { LineChart, Grid } from 'react-native-svg-charts';
-import { Dropdown } from 'react-native-material-dropdown';
+import { StyleSheet, Text, View } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
-
 import { Ionicons } from '@expo/vector-icons';
-
 import Header from './components/header'
 import Graph from './components/graph'
 import Mainpage from './components/mainpage';
 import Transaction from './components/transaction';
-import { Font } from 'expo';
 
 
 const TabNavigator = createBottomTabNavigator(

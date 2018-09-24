@@ -1,10 +1,9 @@
 import React from 'react';
-// import { LineChart, YAxis, Grid, scaleBand, scaleTime } from 'react-native-svg-charts';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { dropDownSelection } from './constant/index';
 import { Dropdown } from 'react-native-material-dropdown';
 import axios from 'axios';
-import { LineChart, BarChart, PieChart, ProgressChart, ContributionGraph } from 'react-native-chart-kit';
+import { LineChart } from 'react-native-chart-kit';
 
 
 class Graph extends React.PureComponent {
