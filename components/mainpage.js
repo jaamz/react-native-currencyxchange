@@ -99,7 +99,7 @@ class Mainpage extends Component {
                                     style={{ width: 50 }}>
                                     <TextInput
                                         style={styles.textInput}
-                                        placeholder="Enter amount here"
+                                        placeholder="Amount"
                                         value={this.state['calculation-' + i]}
                                         onChangeText={text => { this.setState({ ['calculation-' + i]: text }) }}
                                     />
@@ -112,18 +112,29 @@ class Mainpage extends Component {
                                             ?
                                             <View
                                             style={{flexDirection:'column', alignItems:'center'}}>
-                                                <Text>
-                                                    {this.state['calculation-' + i] * item.base.amount} {item.base.symbol}
+                                                <Text
+                                                style={{color:'white', fontSize:16}}>
+                                                    {(this.state['calculation-' + i] * item.base.amount).toFixed(2)} {item.base.symbol}
                                                 </Text>
-                                                <Text>
+                                                <Text
+                                                style={{color:'white', fontSize:16}}>
                                                     =
-                                            </Text>
-                                                <Text>
-                                                    {this.state['calculation-' + i] * item.converted.amount} {item.converted.symbol}
+                                                </Text>
+                                                <Text
+                                                style={{color:'white', fontSize:16}}>
+                                                    {(this.state['calculation-' + i] * item.converted.amount).toFixed(2)} {item.converted.symbol}
                                                 </Text>
                                             </View>
-                                            :
-                                            <Text>{item.base.symbol} = {item.converted.symbol}</Text>
+                                            :   
+                                            <View
+                                            style={{flexDirection:'column', alignItems:'center'}}>
+                                                <Text
+                                                style={{color:'white', fontSize:16}}>{item.base.symbol}</Text>
+                                                <Text
+                                                style={{color:'white', fontSize:16}}>=</Text>
+                                                <Text
+                                                style={{color:'white', fontSize:16}}> {item.converted.symbol}</Text>
+                                            </View>
 
                                     }
                                 </View>
@@ -151,7 +162,9 @@ const styles = StyleSheet.create({
         height: 35,
         textAlign: 'center',
         justifyContent: 'flex-start',
-        marginLeft: 5
+        marginLeft: 5,
+        color:'white',
+        fontSize:18
         // borderColor:'blue',
         // borderWidth:3
 
@@ -167,18 +180,17 @@ const styles = StyleSheet.create({
         height: 30,
         marginBottom: 10,
         borderWidth: .75,
-        borderColor: '#24B724'
+        borderColor: '#24B724',
+        borderRadius:6
 
     },
     mapStyle: {
-        height: 60,
+        height: 80,
         width: Dimensions.get('window').width,
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row',
         borderRadius: 10,
-        borderWidth: 1,
-        // borderColor: 'red'
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -187,6 +199,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.34,
         shadowRadius: 6.27,
         marginBottom: 10,
+        backgroundColor:'#24B724',
 
     },
     buttonContainer: {
@@ -205,10 +218,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         // borderColor:'grey',
         // borderWidth:3,
-        height: 35,
+        height: 50,
         width: 300,
         alignItems: 'center',
-        flexDirection: 'column'
+        flexDirection: 'column',
     },
     blockMap: {
         justifyContent: 'space-between',

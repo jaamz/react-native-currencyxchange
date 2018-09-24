@@ -108,25 +108,29 @@ class Graph extends React.PureComponent {
                     <TouchableOpacity
                         style={styles.buttonStyle}
                         onPress={() => { this.changeAmountOfDays(7) }}>
-                        <Text>Week</Text>
+                        <Text
+                        style={{color:'white'}}>Week</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         style={styles.buttonStyle}
                         onPress={() => { this.changeAmountOfDays(30) }}>
-                        <Text>Month</Text>
+                        <Text
+                        style={{color:'white'}}>Month</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         style={styles.buttonStyle}
                         onPress={() => { this.changeAmountOfDays(180) }}>
-                        <Text>6 Months</Text>
+                        <Text
+                        style={{color:'white'}}>6 Months</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         style={styles.buttonStyle}
                         onPress={() => { this.changeAmountOfDays(365) }}>
-                        <Text>Year</Text>
+                        <Text
+                        style={{color:'white'}}>Year</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -164,9 +168,10 @@ const styles = StyleSheet.create({
         height: 35,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 3,
+        borderRadius: 5,
         borderWidth: 1,
-        borderColor:'#24B724'
+        borderColor:'#24B724',
+        backgroundColor:'#24B724'   
     },
     mapStyle: {
         borderWidth: 1,

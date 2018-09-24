@@ -108,6 +108,10 @@ class Transaction extends Component {
   //   if (this.state)
   // }
 
+  add = (a, b) => {
+    a + b
+  }
+
   render() {
     return (
       <View>
@@ -128,35 +132,47 @@ class Transaction extends Component {
             onChangeText={text => { this.setState({ targetCurrency: text }) }}
             value={this.state.targetCurrency} />
         </View>
-        <View>
-          <TextInput
-            style={styles.textInput}
-            onChangeText={amount => { this.setState({ amount }) }}
-            placeholder='#'
-          />
+        <View
+          style={styles.barStyle}>
+          <View>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={amount => { this.setState({ amount }) }}
+              placeholder='Amount'
+            />
+          </View>
+          <View>
+            <TouchableOpacity
+              style={styles.buttonContainer}
+              onPress={this.state.baseCurrency === 'USD' ? this.buttonPress : this.secondButtonPress}>
+              <Text
+                style={{ color: 'white', fontSize: 16, paddingTop: 7 }}>Submit</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View>
-          <TouchableOpacity
-            style={styles.buttonContainer}
-            onPress={this.state.baseCurrency === 'USD' ? this.buttonPress : this.secondButtonPress}>
-            <Text>+</Text>
-          </TouchableOpacity>
-        </View>
-
         <FlatList
           data={this.state.transactions}
           extraData={this.state}
           renderItem={({ item }) => (
-            <View>
-              <Text>{item.base_sym}: {item.base_rate * item.unit}</Text>
-              <Text>{item.target_sym}: {item.target_rate * item.unit}</Text>
+            <View
+              style={{ flexDirection: 'row', justifyContent:'space-between' }}>
+              <View
+              style={{height:40}}>
+                <Text
+                style={{fontSize: 16}}>{item.base_sym}: {(item.base_rate * item.unit).toFixed(2)}</Text>
+              </View>
+              <View
+              style={{height:40}}>
+                <Text
+                style={{fontSize: 16}}>{item.target_sym}: {(item.target_rate * item.unit).toFixed(2)}</Text>
+              </View>
             </View>
           )}
           keyExtractor={(item, index) => index + ""}
         />
-        <View>
-          {/* <Text>Total Spent:{this.state.transactionTotal}</Text> */}
-          <Text>Converted Total:</Text>
+        <View
+          style={{ justifyContent: 'flex-end', flexDirection: 'column' }}>
+          {/* <Text>Converted Total:{this.state.transactions.length === 0 ? 0 : this.state.transactions.unit.reduce(this.add)  }</Text> */}
         </View>
       </View>
     );
@@ -172,11 +188,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly'
   },
   textInput: {
-    width: 50,
-    height: 30,
+    width: 100,
+    height: 50,
     textAlign: 'center',
-    borderWidth: 1,
-    borderColor: 'black',
+    // borderWidth: 1,
+    // borderColor: 'black',
+    marginLeft: 40,
+    color: 'white'
 
   },
   dropDownStyle: {
@@ -184,10 +202,12 @@ const styles = StyleSheet.create({
 
   },
   buttonStyle: {
-    borderColor: 'black',
-    borderWidth: .5,
     width: 30,
     height: 30,
+    marginBottom: 10,
+    borderWidth: .75,
+    borderColor: '#24B724',
+    borderRadius: 6,
 
   },
   mapStyle: {
@@ -203,10 +223,31 @@ const styles = StyleSheet.create({
   buttonContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    width: 100,
+    height: 50,
+    marginBottom: 10,
+    borderWidth: .75,
+    borderColor: '#24B724',
+    borderRadius: 6,
+    marginRight: 40
   },
   inBetween: {
     paddingTop: 30,
     // fontSize: 20,
+  },
+  barStyle: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: '#24B724',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.20,
+    shadowRadius: 5.00,
+
   }
 });
 

@@ -11,7 +11,7 @@ const Header = props => {
                     
                 <Text
                 style={styles.font}>
-                    RealTime
+                    Trex
                 </Text>
             </View>
         </View>
@@ -25,14 +25,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor:'green',
+        backgroundColor:'#24B724',
         paddingTop:35,
         paddingBottom:20,
 
     },
     font: {
         fontWeight: 'bold',
-        fontSize:22,
+        fontSize:18,
         color:'white'
 
     }
