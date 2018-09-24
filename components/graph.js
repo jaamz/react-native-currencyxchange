@@ -31,6 +31,7 @@ class Graph extends React.PureComponent {
             })
     }
 
+    // setting state and refreshing api call after dropdown is changed
     onChangeDrop = currency => {
         this.setState({
             currency2: currency
@@ -49,6 +50,7 @@ class Graph extends React.PureComponent {
     // Ex. 1 Day Button ( () => this.changeAmountOfDays(1))
     // Ex. 7 Days Button ( () => this.changeAmountOfDays(7))
     // Ex. 30 Days Button ( () => this.changeAmountOfDays(30))
+    // function to change API call for set amount of days
     changeAmountOfDays = days => {
         this.setState({
             days

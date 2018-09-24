@@ -20,11 +20,15 @@ class Transaction extends Component {
     //   })
   }
 
+
+  // API call data
   getData = (base, target) => {
     return axios.get(`http://localhost:3000/${base}?duration=1&target=${target}`)
       .then(res => new Promise((resolve, reject) => resolve(res.data[0][target])))
   }
 
+  // function for button press
+  // calls on API to update after button is pressed
   buttonPress = () => {
     console.log("INPUT:", this.state.inputValue)
     let { baseCurrency, targetCurrency, amount } = this.state;

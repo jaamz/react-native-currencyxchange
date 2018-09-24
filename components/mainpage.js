@@ -109,6 +109,7 @@ class Mainpage extends Component {
                                     />
                                 </View>
 
+                                {/* ternary statement to render submitted  */}
                                 <View
                                     style={styles.calculationStyle}>
                                     {
