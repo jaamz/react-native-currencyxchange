@@ -7,7 +7,7 @@ import Graph from './components/graph'
 import Mainpage from './components/mainpage';
 import Transaction from './components/transaction';
 
-
+// Tab navigator at bottom of page to route to different parts of app
 const TabNavigator = createBottomTabNavigator(
   {
     Home: Mainpage,

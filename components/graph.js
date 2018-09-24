@@ -15,12 +15,12 @@ class Graph extends React.PureComponent {
         xAxis: [],
     }
 
-    
 
     componentDidMount() {
         this.grabData()
     }
 
+    // API information load that will determine the X/Y Axis data points
     grabData = currency => {
         axios.get(`http://localhost:3000/${this.state.currency1}?duration=${this.state.days}&target=${this.state.currency2}`)
             .then(res => {

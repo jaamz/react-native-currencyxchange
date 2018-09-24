@@ -4,8 +4,9 @@ import { Dropdown } from 'react-native-material-dropdown';
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import { Icon } from 'react-native-elements';
 import axios from 'axios';
-// import accounting from 'accounting'
-// import { Ionicons } from '@expo/vector-icons';
+
+// load page where main currency exchange is being done
+
 class Mainpage extends Component {
     state = {
         currency: "USD",
@@ -16,11 +17,12 @@ class Mainpage extends Component {
         calculation: 1,
 
     }
-
+// API data to load on mount
     componentDidMount() {
         this.getData()
     }
 
+    // setting state with API call
     getData = (callback) => {
         axios.get(`http://localhost:3000/${this.state.currency}?duration=1&target=${this.state.currencyCompared}`)
             .then(res => {
@@ -30,6 +32,8 @@ class Mainpage extends Component {
             })
     }
 
+    // button press function to call the API 
+    // will refresh with new information if different drop down is selected to update state with new information
     buttonPress = () => {
         this.getData(() => {
 
@@ -165,8 +169,6 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         color:'white',
         fontSize:18
-        // borderColor:'blue',
-        // borderWidth:3
 
     },
     dropDownStyle: {
@@ -174,8 +176,6 @@ const styles = StyleSheet.create({
 
     },
     buttonStyle: {
-        // borderColor: 'black',
-        // borderWidth: .5,
         width: 30,
         height: 30,
         marginBottom: 10,
@@ -206,18 +206,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    loadContainer: {
-        paddingBottom: 10,
-        alignItems: 'center',
-    },
     inBetween: {
         paddingTop: 30,
-        // fontSize: 20,
     },
     calculationStyle: {
         justifyContent: 'center',
-        // borderColor:'grey',
-        // borderWidth:3,
         height: 50,
         width: 300,
         alignItems: 'center',
@@ -225,7 +218,6 @@ const styles = StyleSheet.create({
     },
     blockMap: {
         justifyContent: 'space-between',
-        // backgroundColor:'red',
         flexDirection: 'row',
 
     }
