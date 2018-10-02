@@ -185,7 +185,6 @@ class Transaction extends Component {
 
 export default Transaction;
 
-
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
@@ -221,7 +220,6 @@ const styles = StyleSheet.create({
     width: 300,
     alignItems: 'center',
     justifyContent: 'center',
-
 
   },
   buttonContainer: {

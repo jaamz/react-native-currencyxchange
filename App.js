@@ -27,7 +27,6 @@ const TabNavigator = createBottomTabNavigator(
           iconName = `ios-paper${focused ? '' : '-outline'}`;
         }
 
-
         return <Ionicons name={iconName} size={25} color={tintColor} />;
       },
     }),
@@ -37,9 +36,6 @@ const TabNavigator = createBottomTabNavigator(
     },
   });
 
-
-
-
 const App = () => <View
                     style={{ flex: 1 }}>
                     <Header />
@@ -47,9 +43,6 @@ const App = () => <View
                   </View>
 
 export default App;
-
-
-
 
 const styles = StyleSheet.create({
   container: {

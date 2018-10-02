@@ -6,11 +6,8 @@ const Header = props => {
 
     return (
         <View>
-            <View
-                style={styles.container}>
-                    
-                <Text
-                style={styles.font}>
+            <View style={styles.container}>
+                <Text style={styles.font}>
                     Trex
                 </Text>
             </View>

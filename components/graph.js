@@ -15,7 +15,6 @@ class Graph extends React.PureComponent {
         xAxis: [],
     }
 
-
     componentDidMount() {
         this.grabData()
     }
@@ -60,9 +59,7 @@ class Graph extends React.PureComponent {
     }
 
     render() {
-
         return (
-
             <View>
                 <View style={styles.container}>
                     <Dropdown
