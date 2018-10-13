@@ -30,7 +30,7 @@ class Transaction extends Component {
   // function for button press
   // calls on API to update after button is pressed
   buttonPress = () => {
-    console.log("INPUT:", this.state.inputValue)
+    // console.log("INPUT:", this.state.inputValue)
     let { baseCurrency, targetCurrency, amount } = this.state;
     let base_rate;
     let target_rate;
