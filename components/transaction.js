@@ -108,10 +108,6 @@ class Transaction extends Component {
     }
   }
 
-  // targetChange = targetCurrency => {
-  //   if (this.state)
-  // }
-
   add = (a, b) => {
     a + b
   }
